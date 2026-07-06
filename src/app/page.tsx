@@ -69,8 +69,8 @@ const caseStudies = [
 const testimonials = [
   {
     text: 'SHSMAM Innovations overhauled our legacy system into a polished AI-powered platform. Their technical judgement changed the trajectory of the product.',
-    name: 'Sarah Jenkins',
-    title: 'CTO, FinTech Forward',
+    name: 'Arpit Singh Parihar',
+    title: 'CTO, FinTech',
     avatar: '/images/avatar-sarah.png',
   },
   {
@@ -214,17 +214,7 @@ export default function Home() {
       </section>
 
       <section className="section-shell section-pad">
-        <div className="flex flex-col justify-between gap-md md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <span className="eyebrow">Selected work</span>
-            <h2 className="display-lg mt-md text-foreground">Flagship case studies</h2>
-            <p className="lead mt-md">Examples of the kind of product and infrastructure problems we solve with design clarity and engineering depth.</p>
-          </div>
-          <Link href="/portfolio" className="btn-secondary px-5 py-4">
-            See all work
-            <ArrowRight size={18} aria-hidden="true" />
-          </Link>
-        </div>
+      
         <div className="mt-xl grid gap-lg lg:grid-cols-2">
           {caseStudies.map((study) => (
             <article key={study.title} className="premium-card group overflow-hidden">
