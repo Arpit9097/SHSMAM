@@ -109,6 +109,7 @@ export default function Home() {
     <>
       <section className="relative overflow-hidden">
         <div className="absolute left-1/2 top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+        <div className="section-shell grid min-h-[calc(100svh-72px)] items-center gap-xl py-xl lg:grid-cols-[1.02fr_0.98fr]">
           <div className="relative z-10">
             <span className="eyebrow">
               <Sparkles size={15} aria-hidden="true" />
@@ -135,7 +136,7 @@ export default function Home() {
             <br />
             <br />
           
-          <div>
+          div
             <dl className="">
               {[
                 ['150+', 'Projects'],
@@ -217,7 +218,7 @@ export default function Home() {
           <div className="max-w-2xl">
             <span className="eyebrow">Selected work</span>
             <h2 className="display-lg mt-md text-foreground">Flagship case studies</h2>
-            <p>Examples of the kind of product and infrastructure problems we solve with design clarity and engineering depth.</p>
+            <p className="lead mt-md">Examples of the kind of product and infrastructure problems we solve with design clarity and engineering depth.</p>
           </div>
           <Link href="/portfolio" className="btn-secondary px-5 py-4">
             See all work
