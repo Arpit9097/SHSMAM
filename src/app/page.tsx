@@ -69,13 +69,13 @@ const caseStudies = [
 const testimonials = [
   {
     text: 'SHSMAM Innovations overhauled our legacy system into a polished AI-powered platform. Their technical judgement changed the trajectory of the product.',
-    name: 'Arpit Singh Parihar',
+    name: 'Arpita Singh Parihar',
     title: 'CTO, FinTech',
-    avatar: '/images/avatar-sarah.png',
+
   },
   {
     text: 'They translated an ambiguous idea into a concrete cloud architecture and kept the delivery process calm, visible, and disciplined.',
-    name: 'David Chen',
+    name: 'Deepak Kumar',
     title: 'Founder, Nexus Health',
     avatar: '/images/avatar-david.png',
   },
@@ -120,8 +120,7 @@ export default function Home() {
             </h1>
             <br />
             <br />
-            
-            <p >
+            <p>
               SHSMAM Innovations helps ambitious teams design and ship high-end digital products, from AI-powered workflows to resilient cloud platforms and polished SaaS experiences.
             </p>
             <div className="mt-lg flex flex-col gap-sm sm:flex-row">
@@ -133,11 +132,7 @@ export default function Home() {
                 View portfolio
               </Link>
             </div>
-            <br />
-            <br />
-          
-          div
-            <dl className="">
+            <dl className="mt-xl grid max-w-4xl grid-cols-3 gap-md border-t border-border pt-md">
               {[
                 ['150+', 'Projects'],
                 ['85+', 'Clients'],
@@ -294,7 +289,6 @@ export default function Home() {
               </div>
               <p className="mt-md flex-1 text-base leading-7 text-foreground">&ldquo;{item.text}&rdquo;</p>
               <div className="mt-md flex items-center gap-sm border-t border-border pt-md">
-                <Image src={item.avatar} alt={item.name} width={48} height={48} className="rounded-full" />
                 <div>
                   <h3 className="font-extrabold text-foreground">{item.name}</h3>
                   <p className="text-sm font-semibold text-muted">{item.title}</p>
@@ -313,7 +307,7 @@ export default function Home() {
                 <BarChart3 size={20} aria-hidden="true" />
                 <span className="text-sm font-extrabold uppercase tracking-[0.14em]">Ready to modernize?</span>
               </div>
-              <h2 className="display-lg mt-sm text-foreground">Let’s turn the product idea into a system your team can rely on.</h2>
+              <h2 className="display-lg mt-sm text-foreground">Let&apos;s turn the product idea into a system your team can rely on.</h2>
             </div>
             <Link href="/contact" className="btn-primary px-5 py-4">
               Talk to us
