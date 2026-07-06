@@ -1,83 +1,103 @@
-import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { 
-  Brain, 
-  ArrowRight, 
-  Rocket, 
-  Eye, 
-  Gem, 
-  Code, 
-  Cpu, 
-  Cloud, 
-  Shield, 
-  Zap, 
-  HeartHandshake, 
-  Star,
+import Link from 'next/link';
+import {
+  ArrowRight,
+  BarChart3,
+  Brain,
+  CheckCircle2,
+  Cloud,
+  Code2,
+  Cpu,
+  Database,
+  Gauge,
+  Layers3,
+  Lock,
+  Rocket,
+  ShieldCheck,
   Sparkles,
-  ChevronRight
+  Star,
 } from 'lucide-react';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import InteractiveShowcase from '@/components/InteractiveShowcase';
 
-// Sleek grayscale placeholder logos for ticker
-function ClientLogos() {
-  const logos = [
-    { name: 'AETHER CLOUD', icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )},
-    { name: 'VERTEX AI', icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 22h20L12 2z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )},
-    { name: 'SOLARIS HEALTH', icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="12" r="5" />
-        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" strokeLinecap="round" />
-      </svg>
-    )},
-    { name: 'NEXUS LABS', icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="5" r="2" />
-        <circle cx="5" cy="19" r="2" />
-        <circle cx="19" cy="19" r="2" />
-        <path d="M12 7v10M6.5 17.5l4-10M17.5 17.5l-4-10" />
-      </svg>
-    )},
-    { name: 'NOVA FINTECH', icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 3v18M3 12h18M12 12l6-6M12 12l-6 6" strokeLinecap="round" />
-      </svg>
-    )},
-    { name: 'AERO AUTOMATION', icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M2 12h20M12 2v20M5 5l14 14M5 19L19 5" strokeLinecap="round" />
-      </svg>
-    )}
-  ];
+const capabilities = [
+  {
+    icon: Brain,
+    title: 'AI product systems',
+    desc: 'Agent workflows, semantic search, model orchestration, and human-reviewed automation built into real products.',
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud architecture',
+    desc: 'Multi-region infrastructure, observability, deployment pipelines, and cost-aware scaling for serious workloads.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Secure SaaS foundations',
+    desc: 'Tenant isolation, role-based access, audit trails, and pragmatic security controls from the first release.',
+  },
+];
 
+const whyPartner = [
+  { icon: Code2, title: 'Senior engineering craft', desc: 'Small, focused teams that design clean interfaces, stable APIs, and maintainable delivery paths.' },
+  { icon: Cpu, title: 'AI where it actually helps', desc: 'We use automation to remove operational drag, not as decoration on top of weak workflows.' },
+  { icon: Database, title: 'Data-aware architecture', desc: 'Schemas, pipelines, and reporting surfaces are designed together so teams can trust the product.' },
+  { icon: Lock, title: 'Security by design', desc: 'Authentication, authorization, secrets, and deployment boundaries are treated as product requirements.' },
+  { icon: Gauge, title: 'Performance budgets', desc: 'We optimize rendering, bundle weight, image delivery, and infrastructure hot paths throughout the build.' },
+  { icon: Layers3, title: 'Long-term systems thinking', desc: 'Every release is planned around the next one, so the system can grow without a rewrite tax.' },
+];
+
+const caseStudies = [
+  {
+    title: 'FinTech Cloud Mesh',
+    client: 'Nova FinTech',
+    stat: '99.99% SLA',
+    desc: 'A zero-downtime Kubernetes mesh for a digital banking platform serving millions of active users.',
+    image: '/images/project-cloud.png',
+    tags: ['Kubernetes', 'AWS', 'Terraform'],
+  },
+  {
+    title: 'Cognitive Care Agent',
+    client: 'Solaris Health',
+    stat: '40% ops lift',
+    desc: 'A secure AI agent network that parses medical transcripts and supports clinical operations with auditability.',
+    image: '/images/project-ai.png',
+    tags: ['GenAI', 'Python', 'Vector DB'],
+  },
+];
+
+const testimonials = [
+  {
+    text: 'SHSMAM Innovations overhauled our legacy system into a polished AI-powered platform. Their technical judgement changed the trajectory of the product.',
+    name: 'Sarah Jenkins',
+    title: 'CTO, FinTech Forward',
+    avatar: '/images/avatar-sarah.png',
+  },
+  {
+    text: 'They translated an ambiguous idea into a concrete cloud architecture and kept the delivery process calm, visible, and disciplined.',
+    name: 'David Chen',
+    title: 'Founder, Nexus Health',
+    avatar: '/images/avatar-david.png',
+  },
+  {
+    text: 'The product quality, performance, and UI polish were exactly what our operators needed. It felt designed for daily use.',
+    name: 'Marcus Thorne',
+    title: 'VP Operations, GlobalLogix',
+    avatar: '/images/avatar-marcus.png',
+  },
+];
+
+const logos = ['AETHER CLOUD', 'VERTEX AI', 'SOLARIS HEALTH', 'NEXUS LABS', 'NOVA FINTECH', 'AERO AUTOMATION'];
+
+function ClientLogos() {
   return (
-    <div className="w-full overflow-hidden relative border-y border-outline-variant/20 dark:border-white/5 py-lg bg-surface-container-lowest/20 dark:bg-zinc-950/10">
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
-      
-      <div className="animate-marquee flex items-center gap-2xl">
-        {/* Set 1 */}
-        {logos.map((logo, i) => (
-          <div key={`set1-${i}`} className="flex items-center gap-xs text-on-surface-variant/45 dark:text-inverse-on-surface/40 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors select-none shrink-0">
-            {logo.icon}
-            <span className="font-bold tracking-widest text-[13px] font-display-lg">{logo.name}</span>
-          </div>
-        ))}
-        {/* Set 2 (for seamless loop) */}
-        {logos.map((logo, i) => (
-          <div key={`set2-${i}`} className="flex items-center gap-xs text-on-surface-variant/45 dark:text-inverse-on-surface/40 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors select-none shrink-0">
-            {logo.icon}
-            <span className="font-bold tracking-widest text-[13px] font-display-lg">{logo.name}</span>
-          </div>
+    <div className="overflow-hidden border-y border-border bg-white py-6">
+      <div className="animate-marquee gap-12 pr-12">
+        {[...logos, ...logos].map((logo, index) => (
+          <span key={`${logo}-${index}`} className="flex shrink-0 items-center gap-3 text-sm font-extrabold tracking-[0.18em] text-muted">
+            <span className="h-2 w-2 rounded-full bg-primary/50" aria-hidden="true" />
+            {logo}
+          </span>
         ))}
       </div>
     </div>
@@ -85,246 +105,141 @@ function ClientLogos() {
 }
 
 export default function Home() {
-  const whyPartner = [
-    {
-      icon: <Code className="text-primary" size={24} />,
-      title: "Experienced Developers",
-      desc: "Elite engineering teams with deep domain expertise across modern technology stacks."
-    },
-    {
-      icon: <Cpu className="text-secondary" size={24} />,
-      title: "AI Driven Innovation",
-      desc: "Integrating predictive modeling and generative AI to future-proof your digital assets."
-    },
-    {
-      icon: <Cloud className="text-tertiary" size={24} />,
-      title: "Cloud Native Architecture",
-      desc: "Designing resilient, infinitely scalable systems on AWS, Azure, and GCP."
-    },
-    {
-      icon: <Shield className="text-primary" size={24} />,
-      title: "Enterprise Security",
-      desc: "Security-first development lifecycle ensuring data integrity and compliance."
-    },
-    {
-      icon: <Zap className="text-secondary" size={24} />,
-      title: "Agile Delivery",
-      desc: "Rapid prototyping and iterative deployment to accelerate time-to-market."
-    },
-    {
-      icon: <HeartHandshake className="text-tertiary" size={24} />,
-      title: "24/7 Strategic Support",
-      desc: "Continuous monitoring, maintenance, and technical consulting post-launch."
-    }
-  ];
-
-  const caseStudies = [
-    {
-      title: "FinTech Cloud Mesh",
-      client: "Nova FinTech",
-      stat: "99.99% SLA Uptime",
-      desc: "Architected a zero-downtime, multi-region Kubernetes mesh on AWS for a fast-growing digital banking application, scaling to 2M+ active users.",
-      image: "/images/project-cloud.png",
-      tags: ["Kubernetes", "AWS", "Terraform"]
-    },
-    {
-      title: "Cognitive Care Agent",
-      client: "Solaris Health",
-      stat: "40% Ops Boost",
-      desc: "Developed a secure cognitive AI agent network to parse unstructured medical transcripts, enabling real-time clinical recommendations with zero data leaks.",
-      image: "/images/project-ai.png",
-      tags: ["GenAI", "Python", "Vector DB"]
-    }
-  ];
-
-  const testimonials = [
-    {
-      stars: 5,
-      text: "SHSMAM Innovations completely overhauled our legacy system into a sleek, AI-powered platform. Their technical mastery is unmatched, and they delivered ahead of schedule.",
-      name: "Sarah Jenkins",
-      title: "CTO, FinTech Forward",
-      avatar: "/images/avatar-sarah.png"
-    },
-    {
-      stars: 5,
-      text: "The team's ability to translate our vague ideas into a concrete, scalable cloud architecture was impressive. They act more like strategic partners than just developers.",
-      name: "David Chen",
-      title: "Founder, Nexus Health",
-      avatar: "/images/avatar-david.png"
-    },
-    {
-      stars: 5,
-      text: "Implementing their custom machine learning models increased our operational efficiency by 40%. The UI/UX is clean, intuitive, and exactly what we needed.",
-      name: "Marcus Thorne",
-      title: "VP Operations, GlobalLogix",
-      avatar: "/images/avatar-marcus.png"
-    }
-  ];
-
   return (
-    <div className="pb-xl relative">
-      {/* Background Decorators */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[150px] -z-10"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-container/5 rounded-full blur-[150px] -z-10"></div>
-
-      {/* Hero Section */}
-      <section className="min-h-[85vh] flex items-center px-gutter max-w-container-max mx-auto mb-xl relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg items-center w-full">
-          {/* Text Content */}
-          <div className="lg:col-span-6 flex flex-col gap-md">
-            <div className="inline-flex items-center gap-xs px-sm py-xs rounded-full glass-card w-max text-primary dark:text-primary-fixed-dim font-label-md text-label-md">
-              <Brain size={16} />
-              <span>SaaS Architecture &amp; AI Agents</span>
-            </div>
-            
-            <h1 className="font-display-xl text-display-xl text-on-surface">
-              Building Intelligent <br /> 
-              <span className="text-primary dark:text-primary-fixed-dim">Digital Solutions</span>
+    <>
+      <section className="relative overflow-hidden">
+        <div className="absolute left-1/2 top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+        <div className="section-shell grid min-h-[calc(100svh-72px)] items-center gap-xl py-xl lg:grid-cols-[1.02fr_0.98fr]">
+          <div className="relative z-10">
+            <span className="eyebrow">
+              <Sparkles size={15} aria-hidden="true" />
+              Premium SaaS, AI and cloud engineering
+            </span>
+            <h1 className="display-xl mt-md max-w-xl text-foreground">
+              Build Software..
             </h1>
+            <br />
+            <br />
             
-            <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface max-w-xl">
-              We help startups and enterprises transform ideas into powerful, high-performance digital products using AI cognitive agents, cloud meshes, and custom engineering.
+            <p >
+              SHSMAM Innovations helps ambitious teams design and ship high-end digital products, from AI-powered workflows to resilient cloud platforms and polished SaaS experiences.
             </p>
-            
-            <div className="flex flex-wrap gap-sm pt-sm">
-              <Link href="/contact" className="btn-primary px-lg py-sm rounded-lg font-label-md text-label-md flex items-center gap-xs cursor-pointer shadow-md">
-                Start a Project <ArrowRight size={18} />
+            <div className="mt-lg flex flex-col gap-sm sm:flex-row">
+              <Link href="/contact" className="btn-primary px-5 py-4">
+                Start a project
+                <ArrowRight size={18} aria-hidden="true" />
               </Link>
-              <Link href="/portfolio" className="btn-primary bg-none border border-outline-variant/30 text-on-surface hover:bg-black/5 dark:text-inverse-on-surface dark:hover:bg-white/5 px-lg py-sm rounded-lg font-label-md text-label-md flex items-center gap-xs cursor-pointer">
-                View Portfolio
+              <Link href="/portfolio" className="btn-secondary px-5 py-4">
+                View portfolio
               </Link>
             </div>
+            <br />
+            <br />
+          
+          <div></div>
+            <dl className="">
+              {[
+                ['150+', 'Projects'],
+                ['85+', 'Clients'],
+                ['99%', 'Retention'],
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <dt className="text-sm font-bold text-muted">{label}</dt>
+                  <dd className="mt-1 font-display-lg text-2xl font-extrabold text-foreground">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          {/* 3D Tech Illustration Area */}
-          <div className="lg:col-span-6 relative h-[300px] sm:h-[400px] lg:h-[500px] w-full">
-            <div className="w-full h-full absolute inset-0 z-10 animate-float">
-              <Image
-                src="/images/hero-tech.png"
-                alt="SHSMAM Innovations AI and Software Engineering Illustration"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain"
-              />
-            </div>
-            
-            {/* Visual Glass Badges */}
-            <div className="absolute top-12 left-4 glass-card p-sm rounded-xl shadow-lg border border-white/20 dark:border-white/5 flex items-center gap-xs z-20 hover:-translate-y-1 transition-transform">
-              <Sparkles size={16} className="text-secondary" />
-              <span className="font-label-md text-label-md text-on-surface text-xs font-semibold">Self-Optimizing Core</span>
-            </div>
-            <div className="absolute bottom-16 right-4 glass-card p-sm rounded-xl shadow-lg border border-white/20 dark:border-white/5 flex items-center gap-xs z-20 hover:-translate-y-1 transition-transform">
-              <Cloud size={16} className="text-primary" />
-              <span className="font-label-md text-label-md text-on-surface text-xs font-semibold">Elastic Scaling</span>
-            </div>
-
-            <div className="absolute inset-0 z-0 opacity-10 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(#004ac6 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Client Logo Bar */}
-      <section className="mb-2xl">
-        <div className="text-center mb-md max-w-3xl mx-auto">
-          <p className="font-semibold text-body-md text-on-surface-variant dark:text-inverse-on-surface uppercase tracking-widest text-xs opacity-60">
-            Trusted by innovative teams worldwide
-          </p>
-        </div>
-        <ClientLogos />
-      </section>
-
-      {/* About Section */}
-      <section className="py-xl px-gutter max-w-container-max mx-auto mb-2xl">
-        <div className="text-center max-w-3xl mx-auto mb-xl">
-          <h2 className="font-display-lg text-display-lg text-on-surface mb-md">The Architect of the Future</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface">Forging the next generation of digital infrastructure through precision engineering and visionary design.</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
-          {/* Mission */}
-          <div className="glass-card rounded-xl p-lg flex flex-col gap-md">
-            <div className="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary dark:text-primary-fixed-dim mb-sm shrink-0">
-              <Rocket size={24} />
-            </div>
-            <h3 className="font-headline-lg text-headline-lg text-on-surface">Mission</h3>
-            <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface">To engineer robust, scalable, and intelligent software that accelerates business growth and technological capability.</p>
-          </div>
-          {/* Vision */}
-          <div className="glass-card rounded-xl p-lg flex flex-col gap-md">
-            <div className="w-12 h-12 rounded-lg bg-secondary-container/10 flex items-center justify-center text-secondary dark:text-secondary-fixed-dim mb-sm shrink-0">
-              <Eye size={24} />
-            </div>
-            <h3 className="font-headline-lg text-headline-lg text-on-surface">Vision</h3>
-            <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface">A seamlessly connected digital ecosystem where AI and human ingenuity collaborate to solve complex global challenges.</p>
-          </div>
-          {/* Values */}
-          <div className="glass-card rounded-xl p-lg flex flex-col gap-md">
-            <div className="w-12 h-12 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary dark:text-tertiary-fixed-dim mb-sm shrink-0">
-              <Gem size={24} />
-            </div>
-            <h3 className="font-headline-lg text-headline-lg text-on-surface">Values</h3>
-            <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface">Precision, Innovation, Integrity, and relentless pursuit of Technical Mastery in every line of code we deploy.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Showcase Section (Stripe Style) */}
-      <section className="py-xl px-gutter max-w-container-max mx-auto mb-2xl">
-        <div className="text-center max-w-3xl mx-auto mb-xl">
-          <h2 className="font-display-lg text-display-lg text-on-surface mb-md">Interactive Technology Showcase</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface">Explore the codebase, scaling performance, and core architecture of our modular systems.</p>
-        </div>
-        <div className="glass-card rounded-2xl p-lg bg-surface-container-lowest/30 dark:bg-zinc-950/20">
-          <InteractiveShowcase />
-        </div>
-      </section>
-
-      {/* Case Study Spotlight Section */}
-      <section className="py-xl px-gutter max-w-container-max mx-auto mb-2xl">
-        <div className="text-center max-w-3xl mx-auto mb-xl">
-          <h2 className="font-display-lg text-display-lg text-on-surface mb-md">Flagship Case Studies</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface">Discover how we help enterprises achieve high performance, reliability, and automation.</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-lg">
-          {caseStudies.map((study, i) => (
-            <article key={i} className="glass-card rounded-2xl overflow-hidden flex flex-col group hover:-translate-y-1 transition-all duration-300">
-              <div className="h-64 relative overflow-hidden w-full">
+          <div className="relative">
+            <div className="absolute inset-6 rounded-[2rem] bg-primary/12 blur-3xl" aria-hidden="true" />
+            <div className="premium-card relative overflow-hidden p-3">
+              <div className="soft-grid relative aspect-[1.08] overflow-hidden rounded-2xl bg-surface-soft">
                 <Image
-                  src={study.image}
-                  alt={study.title}
+                  src="/images/hero-tech.png"
+                  alt="AI, cloud and software platform illustration"
                   fill
+                  priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-contain p-8"
                 />
-                <div className="absolute top-4 left-4 bg-primary text-white font-label-md text-label-md px-sm py-1 rounded-full shadow-md text-xs dark:bg-primary-container">
-                  {study.stat}
+                <div className="absolute left-5 top-5 rounded-xl border border-border bg-white/88 px-4 py-3 shadow-soft backdrop-blur">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-muted">Runtime</p>
+                  <p className="mt-1 text-sm font-extrabold text-foreground">AI workflow online</p>
+                </div>
+                <div className="absolute bottom-5 right-5 rounded-xl border border-border bg-white/88 px-4 py-3 shadow-soft backdrop-blur">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-muted">Latency</p>
+                  <p className="mt-1 text-sm font-extrabold text-primary">42ms edge p95</p>
                 </div>
               </div>
-              <div className="p-lg flex flex-col justify-between flex-grow gap-md">
-                <div className="flex flex-col gap-xs">
-                  <span className="font-semibold text-body-md text-primary dark:text-primary-fixed-dim uppercase tracking-wider text-xs">
-                    {study.client}
-                  </span>
-                  <h3 className="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary dark:group-hover:text-primary-fixed-dim transition-colors">
-                    {study.title}
-                  </h3>
-                  <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface mt-xs">
-                    {study.desc}
-                  </p>
-                </div>
-                <div className="flex flex-wrap items-center justify-between gap-sm border-t border-outline-variant/20 dark:border-white/5 pt-md mt-sm">
-                  <div className="flex gap-xs">
-                    {study.tags.map((tag, idx) => (
-                      <span key={idx} className="bg-surface-container/60 dark:bg-zinc-800/60 px-sm py-1 rounded-full text-xs font-label-md text-label-md text-on-surface-variant dark:text-inverse-on-surface">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href="/portfolio" className="text-primary dark:text-primary-fixed-dim font-label-md text-label-md flex items-center gap-0.5 hover:gap-1.5 transition-all">
-                    View Case Study <ChevronRight size={16} />
-                  </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ClientLogos />
+
+      <section className="section-shell section-pad">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="eyebrow mx-auto">What we build</span>
+          <h2 className="display-lg mt-md text-foreground">Systems that look premium because the architecture underneath is solid.</h2>
+          <p className="lead mt-md">High-end UX is not a skin. We pair interface design, product architecture, and engineering execution so the product feels trustworthy from first click to daily operation.</p>
+        </div>
+        <div className="mt-xl grid gap-md md:grid-cols-3">
+          {capabilities.map(({ icon: Icon, title, desc }) => (
+            <article key={title} className="premium-card p-lg">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-soft text-primary">
+                <Icon size={24} aria-hidden="true" />
+              </div>
+              <h3 className="headline mt-md text-foreground">{title}</h3>
+              <p className="body-copy mt-sm">{desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-subtle py-xl">
+        <div className="section-shell">
+          <div className="grid gap-xl lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+            <div>
+              <span className="eyebrow">Interactive architecture</span>
+              <h2 className="display-lg mt-md text-foreground">Explore how we think about product systems.</h2>
+              <p className="lead mt-md">The tabs below preserve the original interactive showcase while giving it a cleaner, more operational SaaS presentation.</p>
+            </div>
+            <div className="premium-card p-md">
+              <InteractiveShowcase />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell section-pad">
+        <div className="flex flex-col justify-between gap-md md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Selected work</span>
+            <h2 className="display-lg mt-md text-foreground">Flagship case studies</h2>
+            <p className="lead mt-md">Examples of the kind of product and infrastructure problems we solve with design clarity and engineering depth.</p>
+          </div>
+          <Link href="/portfolio" className="btn-secondary px-5 py-4">
+            See all work
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="mt-xl grid gap-lg lg:grid-cols-2">
+          {caseStudies.map((study) => (
+            <article key={study.title} className="premium-card group overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image src={study.image} alt={study.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition duration-500 group-hover:scale-105" />
+                <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-extrabold text-primary shadow-soft backdrop-blur">{study.stat}</div>
+              </div>
+              <div className="p-lg">
+                <p className="text-sm font-extrabold uppercase tracking-[0.14em] text-primary">{study.client}</p>
+                <h3 className="headline mt-sm text-foreground">{study.title}</h3>
+                <p className="body-copy mt-sm">{study.desc}</p>
+                <div className="mt-md flex flex-wrap gap-2">
+                  {study.tags.map((tag) => (
+                    <span key={tag} className="rounded-full bg-primary-soft px-3 py-1 text-xs font-extrabold text-primary">{tag}</span>
+                  ))}
                 </div>
               </div>
             </article>
@@ -332,101 +247,99 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-xl bg-surface-container-low/50 dark:bg-zinc-950/20 backdrop-blur-md border-y border-outline-variant/20 dark:border-white/5 mb-2xl">
-        <div className="max-w-container-max mx-auto px-gutter">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-lg text-center">
-            <div className="flex flex-col items-center">
-              <span className="font-display-xl text-display-xl text-primary dark:text-primary-fixed-dim font-extrabold mb-xs">
-                <AnimatedCounter target={150} />+
-              </span>
-              <span className="font-semibold text-body-md text-on-surface-variant dark:text-inverse-on-surface uppercase tracking-wider">Projects Delivered</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-display-xl text-display-xl text-secondary dark:text-secondary-fixed-dim font-extrabold mb-xs">
-                <AnimatedCounter target={85} />+
-              </span>
-              <span className="font-semibold text-body-md text-on-surface-variant dark:text-inverse-on-surface uppercase tracking-wider">Global Clients</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-display-xl text-display-xl text-tertiary dark:text-tertiary-fixed-dim font-extrabold mb-xs">
-                <AnimatedCounter target={40} />+
-              </span>
-              <span className="font-semibold text-body-md text-on-surface-variant dark:text-inverse-on-surface uppercase tracking-wider">Expert Developers</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-display-xl text-display-xl text-primary dark:text-primary-fixed-dim font-extrabold mb-xs">
-                <AnimatedCounter target={99} />%
-              </span>
-              <span className="font-semibold text-body-md text-on-surface-variant dark:text-inverse-on-surface uppercase tracking-wider">Client Retention %</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-xl px-gutter max-w-container-max mx-auto bg-surface-container-lowest/50 dark:bg-zinc-900/30 backdrop-blur-sm rounded-3xl my-xl border border-white/40 dark:border-white/5 shadow-sm relative overflow-hidden mb-2xl">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10"></div>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-xl gap-sm">
-          <div className="max-w-2xl">
-            <h2 className="font-display-lg text-display-lg text-on-surface mb-md">Why Partner With Us</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface">We don&apos;t just build software; we architect solutions that become the backbone of modern enterprises.</p>
-          </div>
-          <Link className="text-primary dark:text-primary-fixed-dim font-label-md text-label-md flex items-center gap-xs hover:underline mt-sm md:mt-0 cursor-pointer shrink-0" href="/services">
-            Our Methodology <ArrowRight size={16} />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
-          {whyPartner.map((item, idx) => (
-            <div key={idx} className="glass-card rounded-xl p-lg flex gap-md items-start group hover:-translate-y-1 transition-all duration-300">
-              <div className="p-sm rounded-lg bg-white dark:bg-zinc-800 shadow-sm border border-outline-variant/30 dark:border-white/5 transition-colors duration-300 shrink-0 flex items-center justify-center">
-                {item.icon}
+      <section className="border-y border-border bg-white py-xl">
+        <div className="section-shell grid gap-lg text-center sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            [150, '+', 'Projects delivered'],
+            [85, '+', 'Global clients'],
+            [40, '+', 'Expert developers'],
+            [99, '%', 'Client retention'],
+          ].map(([target, suffix, label]) => (
+            <div key={label as string} className="rounded-2xl bg-subtle p-lg">
+              <div className="font-display-lg text-4xl font-extrabold text-primary">
+                <AnimatedCounter target={target as number} />
+                {suffix}
               </div>
-              <div>
-                <h4 className="font-headline-lg text-headline-md text-on-surface mb-sm">{item.title}</h4>
-                <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface">{item.desc}</p>
-              </div>
+              <p className="mt-sm text-sm font-extrabold uppercase tracking-[0.12em] text-muted">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Testimonials Review Section */}
-      <section className="py-xl px-gutter max-w-container-max mx-auto">
-        <div className="text-center mb-xl">
-          <h2 className="font-display-lg text-display-lg text-on-surface mb-md">Client Success Stories</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface">Hear from the partners who have transformed their businesses with us.</p>
+      <section className="section-shell section-pad">
+        <div className="grid gap-xl lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <span className="eyebrow">Why partner with us</span>
+            <h2 className="display-lg mt-md text-foreground">Practical engineering with premium product taste.</h2>
+            <p className="lead mt-md">We keep the work focused: clear scope, strong technical choices, thoughtful interfaces, and delivery habits that hold up under pressure.</p>
+            <Link href="/services" className="btn-primary mt-lg px-5 py-4">
+              Our services
+              <Rocket size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="grid gap-md sm:grid-cols-2">
+            {whyPartner.map(({ icon: Icon, title, desc }) => (
+              <article key={title} className="premium-card p-md">
+                <Icon className="text-primary" size={22} aria-hidden="true" />
+                <h3 className="mt-sm text-base font-extrabold text-foreground">{title}</h3>
+                <p className="body-copy mt-2 text-[0.95rem]">{desc}</p>
+              </article>
+            ))}
+          </div>
         </div>
-        
-        {/* Testimonials Grid (Responsive layout) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-lg">
-          {testimonials.map((t, idx) => (
-            <div key={idx} className="glass-card rounded-xl p-lg flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 min-h-[250px]">
-              <div>
-                <div className="flex text-amber-400 mb-sm gap-0.5">
-                  {Array.from({ length: t.stars }).map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" className="stroke-none" />
-                  ))}
-                </div>
-                <p className="font-body-lg text-body-lg text-on-surface italic mb-md">&ldquo;{t.text}&rdquo;</p>
+      </section>
+
+      <section className="section-shell pb-2xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="eyebrow mx-auto">Client signal</span>
+          <h2 className="display-lg mt-md text-foreground">Trusted by product-minded teams</h2>
+        </div>
+        <div className="mt-xl grid gap-md lg:grid-cols-3">
+          {testimonials.map((item) => (
+            <article key={item.name} className="premium-card flex flex-col p-lg">
+              <div className="flex gap-1 text-primary" aria-label="Five star review">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Star key={index} size={16} fill="currentColor" aria-hidden="true" />
+                ))}
               </div>
-              <div className="flex items-center gap-sm mt-auto">
-                <Image 
-                  className="w-12 h-12 rounded-full object-cover border border-outline-variant/30 dark:border-white/10" 
-                  alt={t.name}
-                  src={t.avatar}
-                  width={48}
-                  height={48}
-                />
+              <p className="mt-md flex-1 text-base leading-7 text-foreground">&ldquo;{item.text}&rdquo;</p>
+              <div className="mt-md flex items-center gap-sm border-t border-border pt-md">
+                <Image src={item.avatar} alt={item.name} width={48} height={48} className="rounded-full" />
                 <div>
-                  <h4 className="font-label-md text-label-md font-bold text-on-surface">{t.name}</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface">{t.title}</p>
+                  <h3 className="font-extrabold text-foreground">{item.name}</h3>
+                  <p className="text-sm font-semibold text-muted">{item.title}</p>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
-    </div>
+
+      <section className="section-shell pb-xl">
+        <div className="glass-card overflow-hidden rounded-2xl p-lg md:p-xl">
+          <div className="grid gap-lg md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <div className="flex items-center gap-2 text-primary">
+                <BarChart3 size={20} aria-hidden="true" />
+                <span className="text-sm font-extrabold uppercase tracking-[0.14em]">Ready to modernize?</span>
+              </div>
+              <h2 className="display-lg mt-sm text-foreground">Let’s turn the product idea into a system your team can rely on.</h2>
+            </div>
+            <Link href="/contact" className="btn-primary px-5 py-4">
+              Talk to us
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-lg grid gap-sm border-t border-border pt-lg sm:grid-cols-3">
+            {['Clear discovery', 'Architecture-first delivery', 'Polished launch support'].map((item) => (
+              <p key={item} className="flex items-center gap-2 text-sm font-bold text-secondary">
+                <CheckCircle2 size={16} className="text-primary" aria-hidden="true" />
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

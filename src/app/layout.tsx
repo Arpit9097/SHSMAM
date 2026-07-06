@@ -3,7 +3,6 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BackgroundShader from "@/components/BackgroundShader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -53,11 +52,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${plusJakarta.variable} scroll-smooth`}>
-      <body className="min-h-screen flex flex-col antialiased text-on-surface dark:text-inverse-on-surface dark:bg-on-surface bg-background">
-        <BackgroundShader />
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${plusJakarta.variable} scroll-smooth`}>
+      <body className="min-h-screen flex flex-col antialiased text-on-surface bg-background">
         <Header />
-        <main className="flex-grow pt-[72px]">
+        <main className="flex-grow">
           {children}
         </main>
         <Footer />

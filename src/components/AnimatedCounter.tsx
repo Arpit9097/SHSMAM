@@ -6,22 +6,25 @@ export default function AnimatedCounter({ target, duration = 2000 }: { target: n
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let start = 0;
-    const end = target;
-    if (start === end) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const frameId = requestAnimationFrame(() => setCount(target));
+      return () => cancelAnimationFrame(frameId);
+    }
 
-    const totalMiliseconds = duration;
-    const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 15);
-    
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(Math.min(start, end));
-      if (start >= end) {
-        clearInterval(timer);
+    let frameId = 0;
+    let startTime: number | null = null;
+
+    const tick = (timestamp: number) => {
+      startTime ??= timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.round(target * progress));
+      if (progress < 1) {
+        frameId = requestAnimationFrame(tick);
       }
-    }, incrementTime);
+    };
 
-    return () => clearInterval(timer);
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
   }, [target, duration]);
 
   return <>{count}</>;

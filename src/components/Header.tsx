@@ -1,138 +1,130 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services' },
+  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Technologies', href: '/technologies' },
+  { name: 'Contact', href: '/contact' },
+];
 
 function Logo() {
   return (
-    <svg className="h-8 w-8 text-primary dark:text-primary-fixed-dim animate-pulse" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 2L30 9V23L16 30L2 23V9L16 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M16 8L24 12V20L16 24L8 20V12L16 8Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.1" strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx="16" cy="16" r="3" fill="currentColor" className="animate-ping origin-center" />
-      <circle cx="16" cy="16" r="2.5" fill="currentColor" />
-    </svg>
+    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white shadow-[0_12px_26px_rgba(7,87,216,0.22)]" aria-hidden="true">
+      <svg className="h-5 w-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 3.5 28 10v12L16 28.5 4 22V10L16 3.5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M10 13.4 16 10l6 3.4v6.9l-6 3.2-6-3.2v-6.9Z" fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M16 10v13.4M10.2 13.5l11.6 6.8M21.8 13.5l-11.6 6.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
+    </span>
   );
 }
 
 export default function Header() {
   const pathname = usePathname();
-  const [darkMode, setDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const activeName = useMemo(() => {
+    return navLinks.find((link) => link.href === pathname)?.name ?? 'Home';
+  }, [pathname]);
 
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark') || 
-                   localStorage.getItem('theme') === 'dark';
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      setTimeout(() => {
-        setDarkMode(true);
-      }, 0);
-    }
+    const onScroll = () => setHasScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleDarkMode = () => {
-    if (darkMode) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setDarkMode(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setDarkMode(true);
-    }
-  };
-
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Technologies', href: '/technologies' },
-    { name: 'Contact', href: '/contact' },
-  ];
-
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/70 dark:bg-on-surface/70 backdrop-blur-md border-b border-white/40 dark:border-white/10 shadow-sm transition-all duration-200">
-      <div className="flex justify-between items-center h-[72px] px-gutter max-w-container-max mx-auto">
-        {/* Brand */}
-        <Link href="/" className="flex items-center gap-sm hover:opacity-90 transition-opacity">
+    <header
+      className={`sticky top-0 z-50 border-b transition-all duration-200 ${
+        hasScrolled || isMobileMenuOpen
+          ? 'border-border bg-white/86 shadow-[0_10px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl'
+          : 'border-transparent bg-white/72 backdrop-blur-xl'
+      }`}
+    >
+      <div className="section-shell flex h-18 items-center justify-between gap-md">
+        <Link href="/" className="focus-ring flex min-w-0 items-center gap-sm rounded-xl" aria-label="SHSMAM Innovations home">
           <Logo />
-          <span className="font-display-lg text-headline-md tracking-tighter text-primary dark:text-primary-fixed-dim font-extrabold select-none">
-            SHSMAM Innovations
+          <span className="min-w-0">
+            <span className="block truncate font-display-lg text-[1.02rem] font-extrabold leading-tight text-foreground sm:text-[1.08rem]">
+              SHSMAM Innovations
+            </span>
+            <span className="hidden text-xs font-semibold text-muted sm:block">AI, cloud and SaaS engineering</span>
           </span>
         </Link>
 
-        {/* Links (Desktop) */}
-        <nav className="hidden md:flex items-center gap-md" aria-label="Desktop Navigation">
+        <nav className="hidden items-center rounded-full border border-border bg-white/80 p-1 shadow-[0_1px_2px_rgba(15,23,42,0.04)] md:flex" aria-label="Primary navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
-                key={link.name}
+                key={link.href}
                 href={link.href}
-                className={`font-label-md text-label-md transition-all hover:-translate-y-[2px] hover:text-primary dark:hover:text-primary-fixed-dim duration-200 ease-in-out pb-1 relative group ${
-                  isActive
-                    ? 'text-primary dark:text-primary-fixed-dim font-bold'
-                    : 'text-on-surface-variant dark:text-inverse-on-surface/85'
+                aria-current={isActive ? 'page' : undefined}
+                className={`focus-ring relative rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                  isActive ? 'text-primary' : 'text-secondary hover:text-foreground'
                 }`}
               >
-                {link.name}
-                <span className={`absolute bottom-0 left-0 h-[2px] bg-primary dark:bg-primary-fixed-dim transition-all duration-300 ${
-                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
+                <span className="relative z-10">{link.name}</span>
+                {isActive && <span className="absolute inset-0 rounded-full bg-primary-soft" aria-hidden="true" />}
               </Link>
             );
           })}
         </nav>
 
-        {/* Actions (Desktop and Mobile) */}
         <div className="flex items-center gap-sm">
-          {/* Dark Mode Toggle */}
+          <Link href="/contact" className="btn-primary hidden px-4 py-3 text-sm sm:inline-flex">
+            Start a project
+            <ArrowRight size={16} aria-hidden="true" />
+          </Link>
           <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-black/5 dark:hover:bg-white/5 transition-all flex items-center justify-center cursor-pointer"
-            aria-label="Toggle dark mode"
-          >
-            {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} className="text-on-surface-variant" />}
-          </button>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-black/5 dark:hover:bg-white/5 transition-all flex items-center justify-center cursor-pointer"
+            type="button"
+            onClick={() => setIsMobileMenuOpen((value) => !value)}
+            className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-white text-foreground transition hover:bg-subtle md:hidden"
             aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle main menu"
+            aria-controls="mobile-navigation"
+            aria-label={`${isMobileMenuOpen ? 'Close' : 'Open'} main menu. Current page: ${activeName}`}
           >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown Panel */}
-      <div 
-        className={`md:hidden absolute left-0 w-full bg-white/95 dark:bg-on-surface/95 border-b border-outline-variant/20 shadow-lg backdrop-blur-lg transition-all duration-300 ease-in-out overflow-hidden z-40 ${
-          isMobileMenuOpen ? 'max-h-[350px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+      <div
+        id="mobile-navigation"
+        className={`md:hidden overflow-hidden border-t border-border bg-white/96 backdrop-blur-xl transition-[max-height,opacity] duration-240 ${
+          isMobileMenuOpen ? 'max-h-[430px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <nav className="flex flex-col px-gutter py-md gap-sm" aria-label="Mobile Navigation">
+        <nav className="section-shell grid gap-2 py-4" aria-label="Mobile navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`py-sm px-md rounded-lg font-label-md text-label-md transition-all duration-200 ${
-                  isActive
-                    ? 'bg-primary/10 text-primary dark:bg-primary-container/20 dark:text-primary-fixed-dim font-bold'
-                    : 'text-on-surface-variant dark:text-inverse-on-surface/85 hover:bg-black/5 dark:hover:bg-white/5'
+                aria-current={isActive ? 'page' : undefined}
+                className={`focus-ring flex items-center justify-between rounded-xl px-4 py-3 text-base font-bold transition ${
+                  isActive ? 'bg-primary-soft text-primary' : 'text-secondary hover:bg-subtle hover:text-foreground'
                 }`}
               >
                 {link.name}
+                {isActive && <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />}
               </Link>
             );
           })}
+          <Link href="/contact" className="btn-primary mt-2 px-4 py-3 text-sm">
+            Start a project
+            <ArrowRight size={16} aria-hidden="true" />
+          </Link>
         </nav>
       </div>
     </header>

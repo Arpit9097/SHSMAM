@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
 import Image from 'next/image';
-import { Rocket, Code } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowUpRight, Code2, Rocket } from 'lucide-react';
 
 export default function Portfolio() {
   const [filter, setFilter] = useState('All');
@@ -14,7 +14,7 @@ export default function Portfolio() {
       title: 'AI Content Generator',
       category: 'AI & ML',
       tags: ['React', 'Python', 'OpenAI API'],
-      description: 'An enterprise-grade AI content generation platform featuring real-time collaborative editing, custom LLM fine-tuning, and robust compliance checking algorithms.',
+      description: 'An enterprise-grade AI content platform with collaborative editing, custom model workflows, and compliance checks.',
       image: '/images/project-ai.png',
       demoUrl: '#',
       githubUrl: '#',
@@ -23,7 +23,7 @@ export default function Portfolio() {
       title: 'FinTech Mobile App',
       category: 'Mobile',
       tags: ['React Native', 'Node.js', 'GraphQL'],
-      description: 'A secure, high-performance mobile banking application offering real-time transaction processing, biometric authentication, and predictive financial analytics.',
+      description: 'A secure mobile banking experience with real-time transaction processing and biometric authentication.',
       image: '/images/project-fintech.png',
       demoUrl: '#',
       githubUrl: '#',
@@ -32,7 +32,7 @@ export default function Portfolio() {
       title: 'Cloud Infrastructure',
       category: 'Cloud',
       tags: ['AWS', 'Terraform', 'Kubernetes'],
-      description: 'Complete modernization of a legacy monolith to a microservices architecture, achieving 99.99% uptime and reducing infrastructure costs by 40%.',
+      description: 'A monolith-to-microservices modernization that improved uptime and reduced infrastructure costs.',
       image: '/images/project-cloud.png',
       demoUrl: '#',
       githubUrl: '#',
@@ -42,86 +42,82 @@ export default function Portfolio() {
       title: 'Enterprise CRM',
       category: 'Enterprise',
       tags: ['Vue.js', 'Laravel', 'PostgreSQL'],
-      description: 'A bespoke customer relationship management system designed for a Fortune 500 client, featuring advanced automation workflows and deep integration with existing ERP systems.',
+      description: 'A custom CRM with automation workflows and integrations into an established enterprise ERP environment.',
       image: '/images/project-crm.png',
       demoUrl: '#',
       githubUrl: '#',
     },
   ];
 
-  const filteredProjects = filter === 'All' 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+  const filteredProjects = filter === 'All' ? projects : projects.filter((project) => project.category === filter);
 
   return (
-    <div className="pb-xl px-gutter max-w-container-max mx-auto py-md relative">
-      {/* Background Blobs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] -z-10"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary-container/10 blur-[150px] -z-10"></div>
-
-      {/* Header Section */}
-      <section className="text-center mb-xl max-w-3xl mx-auto">
-        <h1 className="font-display-xl text-display-xl text-on-surface mb-md">Our Work</h1>
-        <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-inverse-on-surface">
-          Pioneering technical excellence through innovative solutions. Explore our portfolio of cutting-edge projects that define the future of digital architecture.
+    <>
+      <section className="section-shell section-pad text-center">
+        <span className="eyebrow mx-auto">Portfolio</span>
+        <h1 className="display-xl mx-auto mt-md max-w-4xl text-foreground">Selected digital products and infrastructure systems.</h1>
+        <p className="lead mx-auto mt-md max-w-3xl">
+          A focused look at AI platforms, mobile products, cloud modernization, and enterprise tools delivered with product-grade polish.
         </p>
       </section>
 
-      {/* Category Filters */}
-      <div className="flex flex-wrap justify-center gap-sm mb-lg">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-md py-xs rounded-full font-label-md text-label-md transition-all duration-200 cursor-pointer ${
-              filter === cat
-                ? 'bg-primary text-white shadow-md shadow-primary/20 scale-105 dark:bg-primary-container dark:text-white'
-                : 'bg-white/50 dark:bg-zinc-800/50 border border-outline-variant/30 dark:border-white/10 text-on-surface dark:text-inverse-on-surface hover:bg-black/5 dark:hover:bg-white/5'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+      <section className="section-shell pb-xl">
+        <div className="mb-lg flex flex-wrap justify-center gap-2" role="tablist" aria-label="Project category filters">
+          {categories.map((category) => {
+            const active = filter === category;
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setFilter(category)}
+                className={`focus-ring rounded-full px-4 py-2 text-sm font-extrabold transition ${
+                  active ? 'bg-primary text-white shadow-[0_12px_26px_rgba(7,87,216,0.22)]' : 'border border-border bg-white text-secondary hover:bg-subtle hover:text-foreground'
+                }`}
+                role="tab"
+                aria-selected={active}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Project Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-lg">
-        {filteredProjects.map((project, idx) => (
-          <article key={idx} className="glass-card rounded-xl overflow-hidden flex flex-col group hover:-translate-y-1 transition-all duration-300">
-            <div className="h-64 overflow-hidden relative w-full">
-              <Image
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                alt={project.title}
-                src={project.image}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
-            </div>
-            <div className="p-lg flex flex-col flex-grow">
-              <h3 className="font-headline-lg text-headline-lg text-on-surface mb-md">{project.title}</h3>
-              <div className="flex flex-wrap gap-xs mb-md">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-primary-container/10 text-primary dark:text-primary-fixed-dim font-label-md text-label-md">
-                    {tag}
-                  </span>
-                ))}
+        <div className="grid gap-lg md:grid-cols-2">
+          {filteredProjects.map((project) => (
+            <article key={project.title} className="premium-card group overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-80" aria-hidden="true" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-sm">
+                  <div>
+                    <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-white/78">{project.category}</p>
+                    <h2 className="mt-1 font-display-lg text-2xl font-extrabold text-white">{project.title}</h2>
+                  </div>
+                  <ArrowUpRight className="hidden text-white sm:block" size={24} aria-hidden="true" />
+                </div>
               </div>
-              <p className="font-body-md text-body-md text-on-surface-variant dark:text-inverse-on-surface mb-lg flex-grow">
-                {project.description}
-              </p>
-              <div className="flex gap-sm mt-auto">
-                <a className="btn-primary flex-1 py-sm px-md rounded-lg flex justify-center items-center gap-xs font-label-md text-label-md cursor-pointer" href={project.demoUrl}>
-                  <Rocket size={16} /> {project.actionText || 'Live Demo'}
-                </a>
-                <a className="btn-secondary border border-outline-variant/30 dark:border-white/10 text-on-surface dark:text-inverse-on-surface hover:bg-black/5 dark:hover:bg-white/5 flex-1 py-sm px-md rounded-lg flex justify-center items-center gap-xs font-label-md text-label-md cursor-pointer" href={project.githubUrl}>
-                  <Code size={16} /> GitHub
-                </a>
+              <div className="p-lg">
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="rounded-full bg-primary-soft px-3 py-1 text-xs font-extrabold text-primary">{tag}</span>
+                  ))}
+                </div>
+                <p className="body-copy mt-md">{project.description}</p>
+                <div className="mt-lg grid gap-sm sm:grid-cols-2">
+                  <a className="btn-primary px-4 py-3 text-sm" href={project.demoUrl}>
+                    <Rocket size={16} aria-hidden="true" />
+                    {project.actionText || 'Live Demo'}
+                  </a>
+                  <a className="btn-secondary px-4 py-3 text-sm" href={project.githubUrl}>
+                    <Code2 size={16} aria-hidden="true" />
+                    GitHub
+                  </a>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </section>
-    </div>
+    </>
   );
 }
